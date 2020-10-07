@@ -5,8 +5,8 @@
     "iso_checksum_type": "sha256",
     "os_type": "RedHat_64",
 
-    "cpus": "2",
-    "memory": "2048",
+    "cpus": "1",
+    "memory": "1024",
     "disk_size": "30720",
     "hard_drive_discard": "true",
     "hard_drive_interface": "sata",

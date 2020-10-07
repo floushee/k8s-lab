@@ -11,6 +11,14 @@
     name: docker-ce
     state: installed
 
+- name: Copy /etc/hosts file
+  copy:
+    src: files/daemon.json
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Enable Docker
   systemd:
     name: docker
