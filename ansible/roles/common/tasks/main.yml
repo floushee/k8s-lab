@@ -10,7 +10,4 @@
   yum:
     name: nc
     state: installed
-
-- name: Reload firewalld
-  shell: firewall-cmd --reload
     

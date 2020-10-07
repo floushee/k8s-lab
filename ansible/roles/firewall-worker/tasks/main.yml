@@ -1,15 +1,15 @@
+# worker firewall 
 - name: Configure kubelet port
   firewalld:
     port: 10250/tcp
     permanent: true
     state: enabled
 
-# kubelet (read only)
-- name: Configure kubelet (read only) port
+- name: Configure node ports
   firewalld:
-    port: 10255/tcp
+    port: 30000-32767/tcp
     permanent: true
-    state: enabled 
+    state: enabled    
 
 - name: Reload firewalld
   shell: firewall-cmd --reload
