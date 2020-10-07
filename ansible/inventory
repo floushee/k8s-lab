@@ -1,0 +1,10 @@
+[nodes:children]
+master
+worker
+
+[master]
+master-01.k8s-lab.local
+
+[worker]
+worker-01.k8s-lab.local
+worker-02.k8s-lab.local

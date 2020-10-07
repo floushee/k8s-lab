@@ -1,0 +1,7 @@
+- hosts: worker
+  become: yes
+  roles:
+    - common
+    - docker
+    - firewall-worker
+    - k8s

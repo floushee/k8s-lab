@@ -1,0 +1,35 @@
+- name: Configure Kubernetes API port
+  firewalld:
+    port: 6443/tcp
+    permanent: true
+    state: enabled
+
+- name: Configure etcd port
+  firewalld:
+    port: 2379-2380/tcp
+    permanent: true
+    state: enabled
+
+- name: Configure kubelet port
+  firewalld:
+    port: 10250/tcp
+    permanent: true
+    state: enabled
+
+- name: Configure kubelet (read only) port
+  firewalld:
+    port: 10255/tcp
+    permanent: true
+    state: enabled 
+
+- name: Configure scheduler port
+  firewalld:
+    port: 10251/tcp
+    permanent: true
+    state: enabled 
+    
+- name: Configure controler / manager port
+  firewalld:
+    port: 10252/tcp
+    permanent: true
+    state: enabled 

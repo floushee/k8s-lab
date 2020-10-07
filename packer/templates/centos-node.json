@@ -1,0 +1,78 @@
+{
+  "variables": {
+    "iso_url": "http://mirror.digitalnova.at/CentOS/7.8.2003/isos/x86_64/CentOS-7-x86_64-Minimal-2003.iso",
+    "iso_checksum": "659691c28a0e672558b003d223f83938f254b39875ee7559d1a4a14c79173193",
+    "iso_checksum_type": "sha256",
+    "os_type": "RedHat_64",
+
+    "cpus": "1",
+    "memory": "1024",
+    "disk_size": "30720",
+    "hard_drive_discard": "true",
+    "hard_drive_interface": "sata",
+    "hard_drive_nonrotational": "true",
+    "headless": "true",
+    
+    "ssh_timeout": "10000s",
+    "ssh_user": "floushee",
+    "ssh_password": "password",
+
+    "vm_output_directory": "output",
+    "vm_name": "centos-node",
+    "vm_domain": "k8s-lab.local",
+    "vm_static_ip": "192.168.156.111",
+
+    "kickstart_file": "ks.cfg"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "guest_os_type": "{{user `os_type`}}",
+      "iso_url": "{{user `iso_url`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      
+      "headless": "{{user `headless`}}",
+      "output_directory": "{{user `vm_output_directory`}}/{{user `vm_name`}}",
+      "vm_name": "{{user `vm_name`}}",
+      
+      "disk_size": "{{user `disk_size`}}",
+      "hard_drive_discard": "{{user `hard_drive_discard`}}",
+      "hard_drive_nonrotational": "{{user `hard_drive_nonrotational`}}",
+      "hard_drive_interface": "{{user `hard_drive_interface`}}",
+      "http_directory": "http",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<esc>",
+        "<wait>",
+        "linux inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/{{ user `kickstart_file` }} biosdevname=0 net.ifnames=0",
+        "<enter>"
+      ],
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--memory", "{{user `memory`}}"],
+        ["modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}"],
+        ["modifyvm", "{{.Name}}", "--nic1", "nat", "--nictype1", "virtio"],
+        ["modifyvm", "{{.Name}}", "--nic2", "hostonly", "--hostonlyadapter2", "vboxnet0"]
+      ],
+
+      "ssh_username": "{{user `ssh_user`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "shutdown_command": "sudo systemctl poweroff"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "environment_vars": [
+        "static_ip={{user `vm_static_ip`}}",
+        "vm_name={{user `vm_name`}}.{{user `vm_domain`}}"
+      ],
+      "execute_command": "sudo {{.Vars}} sh {{.Path}}",
+      "scripts": [
+        "scripts/static-ip.sh",
+        "scripts/hostname.sh",
+        "scripts/env.sh"
+      ]
+    }
+  ]
+}

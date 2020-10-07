@@ -1,0 +1,16 @@
+- name: Copy /etc/hosts file
+  copy:
+    src: files/hosts
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install debug tools
+  yum:
+    name: nc
+    state: installed
+
+- name: Reload firewalld
+  shell: firewall-cmd --reload
+    

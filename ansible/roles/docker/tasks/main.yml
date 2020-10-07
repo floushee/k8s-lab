@@ -1,0 +1,29 @@
+- name: Add Docker-CE stable repo
+  yum_repository:
+    name: docker-ce-stable
+    description: Docker CE Stable Repo
+    baseurl: https://download.docker.com/linux/centos/7/$basearch/stable
+    gpgkey: https://download.docker.com/linux/centos/gpg
+    gpgcheck: yes
+
+- name: Install Docker
+  yum:
+    name: docker-ce
+    state: installed
+
+- name: Enable Docker
+  systemd:
+    name: docker
+    state: started
+    enabled: true
+
+- name: Add "docker" group
+  group:
+    name: docker
+    state: present
+
+- name: Add the 'floushee' user to the 'docker' group
+  user:
+    name: floushee
+    groups: docker
+    append: yes

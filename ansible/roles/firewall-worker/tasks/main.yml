@@ -1,0 +1,16 @@
+- name: Configure kubelet port
+  firewalld:
+    port: 10250/tcp
+    permanent: true
+    state: enabled
+
+# kubelet (read only)
+- name: Configure kubelet (read only) port
+  firewalld:
+    port: 10255/tcp
+    permanent: true
+    state: enabled 
+
+- name: Reload firewalld
+  shell: firewall-cmd --reload
+  
