@@ -5,3 +5,5 @@
     - docker
     - firewall-master
     - k8s
+    - k8s-master
+    

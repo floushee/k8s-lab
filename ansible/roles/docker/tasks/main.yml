@@ -11,7 +11,13 @@
     name: docker-ce
     state: installed
 
-- name: Copy /etc/hosts file
+- name: Create /etc/docker
+  file:
+    path: /etc/docker
+    state: directory
+    mode: 0644
+
+- name: Copy Docker daemon config file
   copy:
     src: files/daemon.json
     dest: /etc/docker/daemon.json

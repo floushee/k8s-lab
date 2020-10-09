@@ -1,0 +1,42 @@
+- name: Initialize k8s cluster
+  shell: kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.56.111 --control-plane-endpoint=192.168.56.111
+
+# https://docs.projectcalico.org/manifests/calico.yaml
+# configured CALICO_IPV4POOL_CIDR to be 10.244.0.0/16  
+- name: Copy calico.yml file
+  copy:
+    src: files/calico.yaml
+    dest: /tmp/calico.yaml
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Create .kube directory
+  file:
+    path: /home/floushee/.kube
+    state: directory
+    mode: 0755
+  become: yes
+  become_user: floushee  
+
+- name: Copy admin.conf
+  copy:
+    src: /etc/kubernetes/admin.conf
+    remote_src: yes
+    dest: /home/floushee/.kube/config
+    owner: floushee
+    group: floushee
+    mode: 0644
+
+- name: Deploy calico add-on
+  shell: kubectl apply -f /tmp/calico.yaml
+  become: yes
+  become_user: floushee  
+
+- name: Get kubeadmin join command
+  shell: kubeadm token create --print-join-command
+  become: yes
+  become_user: floushee
+  register: out
+
+- debug: var=out.stdout_lines

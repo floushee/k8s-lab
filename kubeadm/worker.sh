@@ -12,9 +12,6 @@
 # kubeadm token create --print-join-command
 
 #Using the master (API Server) IP address or name, the token and the cert has, let's join this Node to our cluster.
-sudo kubeadm join 192.168.56.111:6443 \
-    --token pgfpgb.jgdmfbtlchzlgbte \
-    --discovery-token-ca-cert-hash sha256:ff1d2fcf199a55038fcf9e8a377e457f30126a52c299d633e94b5a3873dc5e6e
-
-
-kubeadm join 192.168.56.111:6443 --token 4zb85g.abuy40ne4kr793gz --discovery-token-ca-cert-hash sha256:ff1d2fcf199a55038fcf9e8a377e457f30126a52c299d633e94b5a3873dc5e6e
+sudo kubeadm join 192.168.56.111:6443 --token z041a4.v97lc3f5vivc1pse \
+  --discovery-token-ca-cert-hash sha256:75056f92e700c78994e389a5045b64431ab08488eaf3c61e050340ee96dae0e1 \
+    --control-plane
