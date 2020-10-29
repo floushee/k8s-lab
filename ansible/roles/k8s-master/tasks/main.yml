@@ -32,11 +32,3 @@
   shell: kubectl apply -f /tmp/calico.yaml
   become: yes
   become_user: floushee  
-
-- name: Get kubeadmin join command
-  shell: kubeadm token create --print-join-command
-  become: yes
-  become_user: floushee
-  register: out
-
-- debug: var=out.stdout_lines
