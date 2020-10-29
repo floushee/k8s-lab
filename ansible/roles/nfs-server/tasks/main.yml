@@ -1,0 +1,37 @@
+- name: Install nfs-utils
+  yum:
+    name: nfs-utils
+    state: installed
+
+- name: Enable NFS service
+  systemd:
+    name: nfs-server
+    state: started
+    enabled: true
+
+- name: Create nfs directory
+  file:
+    path: /export/volumes
+    state: directory
+    mode: 0755
+
+- name: Copy /etc/exports
+  copy:
+    src: files/exports
+    dest: /etc/exports
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Run exportfs
+  shell: exportfs -a
+  
+- name: Configure firewall
+  firewalld:
+    service: nfs
+    permanent: true
+    state: enabled    
+
+- name: Reload firewalld
+  shell: firewall-cmd --reload
+  

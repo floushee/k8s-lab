@@ -5,7 +5,6 @@ ssh -i ../ssh/packer -o "StrictHostKeyChecking=no" floushee@worker-01 sudo $join
 
 # get kube config for cluster access
 if [ -f ~/.kube/config ];then
-  cp ~/.kube/config ~/.kube/config.bkp
+  cp -f ~/.kube/config ~/.kube/config.`date '+%Y%m%d%H%M%s'`.bkp
 fi
 scp -i ../ssh/packer floushee@master-01:/home/floushee/.kube/config ~/.kube/config
-

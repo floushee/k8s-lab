@@ -2,3 +2,4 @@
 ::1             localhost localhost.localdomain localhost6 localhost6.localdomain6
 192.168.56.111  master-01.k8s-lab.local master-01
 192.168.56.112  worker-01.k8s-lab.local worker-01
+192.168.56.120  storage-01.k8s-lab.local storage-01

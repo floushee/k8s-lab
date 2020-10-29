@@ -1,9 +1,13 @@
 [nodes:children]
 master
 worker
+storage
 
 [master]
 master-01.k8s-lab.local
 
 [worker]
 worker-01.k8s-lab.local
+
+[storage]
+storage-01.k8s-lab.local

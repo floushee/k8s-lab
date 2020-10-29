@@ -8,7 +8,7 @@
 
 - name: Install kubelet + kubeadm + kubectl
   yum:
-    name: ["kubelet", "kubeadm", "kubectl"]
+    name: ["kubelet", "kubeadm", "kubectl", "nfs-utils"]
     state: installed
 
 - name: Enable kublet service
