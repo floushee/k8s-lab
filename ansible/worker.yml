@@ -5,4 +5,3 @@
     - docker
     - firewall-worker
     - k8s
-    - k8s-worker

@@ -1,2 +1,3 @@
 #!/bin/bash
-ansible-playbook -i inventory master.yml worker.yml
+ansible-playbook -i inventory master.yml worker
+

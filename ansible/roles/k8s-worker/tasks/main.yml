@@ -1,3 +1,0 @@
-# token and hash will be part of the master.yml playbook (see ansible/roles/k8s-master/tasks/main.yml)
-- name: Join k8s cluster
-  shell: kubeadm join 192.168.56.111:6443 --token 4we7qc.jhrefxxj53ztwdtx     --discovery-token-ca-cert-hash sha256:57b09f3f4a1db02531109da11d3a7bbcb38f9010bc58f91aff3b606447f7b945
