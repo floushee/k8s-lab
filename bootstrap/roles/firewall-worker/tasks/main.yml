@@ -9,7 +9,13 @@
   firewalld:
     port: 30000-32767/tcp
     permanent: true
-    state: enabled    
+    state: enabled
+
+- name: Configure Calico BGP port
+  firewalld:
+    port: 179/tcp
+    permanent: true
+    state: enabled 
 
 - name: Reload firewalld
   shell: firewall-cmd --reload

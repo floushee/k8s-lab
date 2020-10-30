@@ -9,3 +9,6 @@ ssh -i ../ssh/packer -o "StrictHostKeyChecking=no" floushee@worker-01 sudo $join
 
 # get kube config for cluster access
 scp -i ../ssh/packer floushee@master-01:/home/floushee/.kube/config ~/.kube/k8s-lab.config
+
+# allow pods to be scheduled on master node
+kubectl taint node master-01.k8s-lab.local node-role.kubernetes.io/master:NoSchedule-

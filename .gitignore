@@ -2,4 +2,5 @@ nodes/output
 nodes/packer_cache
 ssh/packer*
 .DS_Store
-unfinished
+playground
+
