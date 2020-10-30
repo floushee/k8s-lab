@@ -35,6 +35,10 @@
     permanent: true
     state: enabled 
 
+# was needed to access pods on different nodes (calico)
+- name: Add maqsuerade
+  shell: firewall-cmd --add-masquerade --permanent
+
 - name: Reload firewalld
   shell: firewall-cmd --reload
   
