@@ -12,3 +12,7 @@ scp -i ../ssh/packer floushee@master-01:/home/floushee/.kube/config ~/.kube/k8s-
 
 # allow pods to be scheduled on master node
 kubectl taint node master-01.k8s-lab.local node-role.kubernetes.io/master:NoSchedule-
+
+# deploy nginx ingress controller
+# https://kubernetes.github.io/ingress-nginx/deploy/
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.40.2/deploy/static/provider/baremetal/deploy.yaml

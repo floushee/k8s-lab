@@ -29,6 +29,13 @@
     permanent: true
     state: enabled 
 
+# so we can schedule pods to the master node too 
+- name: Configure node ports
+  firewalld:
+    port: 30000-32767/tcp
+    permanent: true
+    state: enabled
+
 - name: Configure Calico BGP port
   firewalld:
     port: 179/tcp
